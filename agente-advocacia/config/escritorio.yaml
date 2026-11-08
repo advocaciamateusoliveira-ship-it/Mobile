@@ -1,0 +1,74 @@
+# =====================================================================
+#  Dados do escritório — EDITE este arquivo com as suas informações.
+#  O agente só fala o que estiver aqui; ele não inventa nada.
+# =====================================================================
+
+escritorio:
+  nome: "Mateus Oliveira Advocacia"
+  advogado: "Dr. Mateus Oliveira"
+  oab: "OAB/XX 000.000"             # aparece só se o cliente perguntar
+  endereco: "Rua Exemplo, 123, Sala 45 — Centro, Cidade/UF, CEP 00000-000"
+  link_mapa: "https://maps.google.com/?q=Rua+Exemplo+123"
+  telefone_publico: "(00) 00000-0000"
+  site: ""
+  instrucoes_chegada: "Prédio comercial, informar o nome na portaria."
+
+# Número que recebe os avisos do agente (novos agendamentos e casos urgentes).
+# Formato internacional só com dígitos: 55 + DDD + número.
+whatsapp_advogado: "5500000000000"
+
+# Fuso horário do escritório
+fuso: "America/Sao_Paulo"
+
+# Expediente em que o agente pode MARCAR consultas (ele atende 24h,
+# mas só oferece horários dentro destes intervalos).
+# Dias: seg ter qua qui sex sab dom
+expediente:
+  seg: ["09:00-12:00", "14:00-18:00"]
+  ter: ["09:00-12:00", "14:00-18:00"]
+  qua: ["09:00-12:00", "14:00-18:00"]
+  qui: ["09:00-12:00", "14:00-18:00"]
+  sex: ["09:00-12:00", "14:00-17:00"]
+  sab: []
+  dom: []
+
+consulta:
+  duracao_minutos: 60
+  intervalo_entre_consultas_minutos: 0
+  antecedencia_minima_horas: 12       # não marca nada em menos de 12h
+  dias_a_frente: 21                   # até quantos dias à frente ele oferece horário
+  modalidades: ["presencial", "online (Google Meet)"]
+  # Como falar de valores. Deixe claro para o agente o que ele pode dizer.
+  valor: "A primeira consulta custa R$ 200,00, paga no dia. Se o caso for fechado, o valor é abatido dos honorários."
+
+# Áreas atendidas — o agente usa isto na triagem.
+# Se o caso não for de nenhuma área, ele avisa com educação.
+areas:
+  - nome: "Trabalhista"
+    exemplos: "demissão, verbas rescisórias, horas extras, assédio, acidente de trabalho"
+  - nome: "Família"
+    exemplos: "divórcio, pensão alimentícia, guarda, inventário, união estável"
+  - nome: "Previdenciário"
+    exemplos: "aposentadoria, BPC/LOAS, auxílio-doença, revisão de benefício"
+  - nome: "Consumidor"
+    exemplos: "cobrança indevida, negativação, problemas com bancos, planos de saúde, voos"
+  - nome: "Cível"
+    exemplos: "contratos, indenizações, cobranças, aluguel e despejo"
+
+# Situações que o agente trata como URGENTES: avisa você na hora pelo WhatsApp
+# e orienta o cliente sobre o que fazer enquanto isso.
+urgencias:
+  - "pessoa presa ou detida agora (prisão em flagrante, audiência de custódia)"
+  - "violência doméstica ou risco à integridade física (orientar a ligar 190 / 180)"
+  - "prazo judicial ou audiência nos próximos 3 dias"
+  - "plano de saúde negando cirurgia, internação ou tratamento urgente"
+  - "ordem de despejo, penhora ou bloqueio de conta já acontecendo"
+
+# Lembretes automáticos enviados ao cliente antes da consulta
+lembretes:
+  - horas_antes: 24
+  - horas_antes: 2
+
+# Depois de quantas horas sem conversa o agente começa um atendimento novo
+# (ele ainda lembra o nome e as consultas do cliente).
+nova_sessao_apos_horas: 12
