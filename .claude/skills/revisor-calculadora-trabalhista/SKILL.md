@@ -1,6 +1,6 @@
 ---
 name: revisor-calculadora-trabalhista
-description: Revisa reclamações trabalhistas (sempre atualizando antes a legislação e a jurisprudência no Jusratio) (petição inicial, minuta ou relato de fatos) e liquida pedidos trabalhistas com cálculo em código. Use sempre que o usuário enviar uma RT ou um relato de caso trabalhista para revisar, pedir análise de risco, prescrição, rito ou teses omissas, ou pedir cálculo de verbas rescisórias, horas extras, adicionais, reflexos, FGTS, multas, correção monetária ou valor da causa, mesmo que não use a palavra "cálculo" ou "revisão".
+description: Revisa reclamações trabalhistas (sempre atualizando antes a legislação e a jurisprudência em todas as fontes: Jusratio, Planalto, TST, STF, TRT e tabelas oficiais) (petição inicial, minuta ou relato de fatos) e liquida pedidos trabalhistas com cálculo em código. Use sempre que o usuário enviar uma RT ou um relato de caso trabalhista para revisar, pedir análise de risco, prescrição, rito ou teses omissas, ou pedir cálculo de verbas rescisórias, horas extras, adicionais, reflexos, FGTS, multas, correção monetária ou valor da causa, mesmo que não use a palavra "cálculo" ou "revisão".
 ---
 
 # Revisor de Reclamação Trabalhista e Calculadora Trabalhista
@@ -19,35 +19,66 @@ Arquivos de apoio (leia quando indicado):
 
 ---
 
-## 0. Etapa obrigatória em todo caso novo: atualização normativa
+## 0. Etapa obrigatória em todo caso novo: atualização normativa completa
 
-Antes de revisar ou calcular, sempre que o usuário trouxer um caso novo, pesquise a legislação e a jurisprudência atuais. Não pule esta etapa, mesmo que a matéria pareça conhecida ou já esteja na referência.
+Antes de revisar ou calcular, sempre que o usuário trouxer um caso novo, pesquise a legislação e a jurisprudência atuais em **todas as fontes disponíveis**, e não só numa. Não pule esta etapa, mesmo que a matéria pareça conhecida ou já esteja na referência. O usuário autorizou de forma expressa e permanente o uso de fontes externas além do Jusratio.
 
-1. **Liste os temas do caso**: cada pedido, modalidade de rescisão, categoria, período contratual e questões processuais (rito, prescrição, gratuidade, responsabilidade de terceiros).
-2. **Legislação** (`buscar_legislacao` do Jusratio):
-   - confirme a redação **vigente** de cada artigo que vai fundamentar a análise (CLT, leis especiais, CF), observando `revogado` e `vigencia_status`;
-   - procure lei, medida provisória ou decreto **posterior** que altere o tema;
-   - confirme os valores do ano: salário mínimo, teto e tabela do INSS, tabela do IR, seguro-desemprego;
-   - se o contrato atravessa mudanças legais, verifique a redação de cada época.
-3. **Jurisprudência** (`pesquisar_documentos` do Jusratio):
-   - **uma** busca abrangente por tema central, com vocabulário de autoridade ("Tema", "IRR", "repercussão geral", "súmula");
-   - abra (`obter_documento`, sem custo) cada súmula ou OJ que pretende citar e confira se está cancelada ou alterada;
-   - confira o status de temas pendentes que afetem o caso, como o Tema 1.389;
-   - se o caso tramita ou vai tramitar num TRT conhecido, busque também o entendimento desse tribunal nos pontos controvertidos.
-4. **Compare com `references/jurisprudencia-verificada.md`**. Se algo mudou, use a informação nova e avise o usuário que a referência está desatualizada naquele ponto.
-5. **Abra a resposta com a seção "Atualização normativa"**, contendo:
-   - a data da consulta;
-   - o que foi conferido;
-   - o que mudou em relação à referência;
-   - os links das fontes.
-6. **Créditos**: pesquisas no Jusratio consomem créditos. Abrir documentos e súmulas pelo `doc_id` não consome. Prefira poucas buscas amplas e informe no fim quantos créditos foram usados.
-7. **Sem Jusratio disponível**: avise o usuário logo no início. Prossiga apenas com a referência, marcando tudo como "não verificado nesta data".
+### 0.1 Liste os temas do caso
+Cada pedido, modalidade de rescisão, categoria e CCT, período contratual e questões processuais (rito, prescrição, gratuidade, responsabilidade de terceiros).
+
+### 0.2 Fontes obrigatórias (consulte todas)
+
+**A. Jusratio** (base jurisprudencial e legislativa)
+- **Legislação** (`buscar_legislacao`): confirme a redação vigente de cada artigo, observando `revogado` e `vigencia_status`.
+- **Jurisprudência** (`pesquisar_documentos`): uma busca abrangente por tema central, com vocabulário de autoridade ("Tema", "IRR", "repercussão geral", "súmula").
+- **Verbetes**: abra cada súmula ou OJ que pretende citar (`obter_documento`, sem custo) e confira se está cancelada ou alterada.
+- **Temas pendentes**: confira o status (ex.: Tema 1.389) e o histórico de superações (`listar_overruling_por_tema`).
+
+**B. Fontes oficiais na web** (WebSearch e WebFetch, ou o agente `web-fetch`)
+- **Planalto** (planalto.gov.br): texto compilado e atualizado da CLT, da CF e das leis especiais. Procure também leis, medidas provisórias e decretos publicados nos últimos meses sobre o tema.
+- **TST** (tst.jus.br):
+  - súmulas, OJs e precedentes normativos atualizados;
+  - tabela de Incidentes de Recursos Repetitivos (IRR), com temas julgados e pendentes;
+  - resoluções recentes que alterem ou cancelem verbetes;
+  - Instruções Normativas;
+  - notícias de julgamentos recentes da SDI-1 e do Pleno.
+- **STF** (stf.jus.br): andamento dos temas de repercussão geral e das ações de controle concentrado em matéria trabalhista (suspensões, julgamentos, modulações).
+- **TRT da região do caso** (portal do tribunal): súmulas, teses jurídicas prevalecentes e IRDRs do regional.
+- **Valores e tabelas do ano**, em gov.br, INSS, Receita Federal, Ministério do Trabalho e Caixa (FGTS):
+  - salário mínimo;
+  - teto e alíquotas do INSS;
+  - tabela do IR e regras de rendimentos recebidos acumuladamente;
+  - tabela do seguro-desemprego;
+  - índices (IPCA-E, IPCA, SELIC; o Banco Central e o IBGE são as fontes primárias).
+- **Normas regulamentadoras** do MTE (NR-15, NR-16 e anexos) quando houver insalubridade ou periculosidade.
+- **Norma coletiva da categoria**: Mediador do MTE (registro de CCT e ACT), quando o usuário não a fornecer.
+
+**C. Fontes complementares** (apenas para localizar novidades; confirme sempre na fonte oficial)
+- Notícias jurídicas especializadas e sites de tribunais com julgamentos da última semana sobre o tema.
+
+### 0.3 Regras de confronto
+- **Hierarquia**: texto oficial (Planalto, DOU, site do tribunal) > Jusratio > fontes secundárias. Notícia nunca fundamenta sozinha. Use-a só para descobrir o que confirmar.
+- **Divergência entre fontes** (ex.: verbete vigente no Jusratio e cancelado no site do TST): prevalece a fonte oficial mais recente. Diga isso ao usuário.
+- **Compare com `references/jurisprudencia-verificada.md`.** Se algo mudou, use a informação nova e avise que a referência está desatualizada naquele ponto.
+- **Separe a origem**: no texto, identifique o que veio do Jusratio e o que veio de fonte externa, com o link completo de cada uma. Nunca atribua ao Jusratio algo encontrado na web, nem o contrário.
+
+### 0.4 Seção "Atualização normativa" (abre toda resposta de caso novo)
+- data e hora da consulta;
+- fontes consultadas (Jusratio e cada site oficial);
+- o que foi conferido, tema por tema;
+- novidades encontradas (lei, súmula, tema ou valor alterado), com link;
+- divergências entre fontes e como foram resolvidas;
+- o que não pôde ser verificado, com o motivo (fonte fora do ar, acesso bloqueado, tema sem resultado).
+
+### 0.5 Custos e falhas
+- **Créditos do Jusratio**: as pesquisas consomem créditos; abrir documentos pelo `doc_id` não consome. Informe no fim quantos foram usados.
+- **Fonte indisponível** (Jusratio fora do ar, site bloqueado pela rede): avise no início, continue com as demais e marque como "não verificado nesta data" os pontos que dependiam dela. Nunca preencha a lacuna com memória apresentada como verificada.
 
 ---
 
 ## 1. Regras invioláveis
 
-1. **Nada de jurisprudência inventada.** Cite apenas o que está em `references/jurisprudencia-verificada.md` ou o que você confirmou agora numa ferramenta de pesquisa (Jusratio, se disponível). Marque o restante como **"(não verificado)"**. Nunca cite como vigente um verbete da lista de cancelados.
+1. **Nada de jurisprudência inventada.** Cite apenas o que está em `references/jurisprudencia-verificada.md` ou o que você confirmou agora nas fontes da etapa 0 (Jusratio e fontes oficiais). Marque o restante como **"(não verificado)"**. Nunca cite como vigente um verbete da lista de cancelados.
 2. **Data dos fatos primeiro.** A Lei 13.467/2017 vale para fatos a partir de 11/11/2017, inclusive em contratos já em curso (Tema 23 IRR). Para fatos anteriores, aplique o regime antigo, inclusive verbetes hoje cancelados.
 3. **Norma coletiva.** Pergunte se há CCT ou ACT. Ela pode fixar adicionais, pisos, divisores e bases mais favoráveis. Nas matérias do art. 611-A ela prevalece sobre a lei, respeitado o art. 611-B (Tema 1.046 do STF).
 4. **Nunca calcule de cabeça.** Toda conta é feita em código executado: Python, com `decimal.Decimal`.
@@ -327,5 +358,5 @@ A regra geral é a do art. 818, com possibilidade de distribuição dinâmica (�
 ---
 
 ## 4. Limites
-- A referência foi conferida em 24/11/2026. Para teses decisivas, confirme novamente no Jusratio, sobretudo temas com julgamento pendente.
+- A referência foi conferida em 24/11/2026 e serve só de ponto de partida: a etapa 0 (atualização completa em todas as fontes) é obrigatória em todo caso novo.
 - O resultado é apoio técnico ao advogado responsável e não substitui a conferência dos documentos e dos cálculos antes do protocolo.
