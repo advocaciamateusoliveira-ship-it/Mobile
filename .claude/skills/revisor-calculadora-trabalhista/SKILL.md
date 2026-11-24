@@ -1,6 +1,6 @@
 ---
 name: revisor-calculadora-trabalhista
-description: Revisa reclamações trabalhistas (petição inicial, minuta ou relato de fatos) e liquida pedidos trabalhistas com cálculo em código. Use sempre que o usuário enviar uma RT ou um relato de caso trabalhista para revisar, pedir análise de risco, prescrição, rito ou teses omissas, ou pedir cálculo de verbas rescisórias, horas extras, adicionais, reflexos, FGTS, multas, correção monetária ou valor da causa, mesmo que não use a palavra "cálculo" ou "revisão".
+description: Revisa reclamações trabalhistas (sempre atualizando antes a legislação e a jurisprudência no Jusratio) (petição inicial, minuta ou relato de fatos) e liquida pedidos trabalhistas com cálculo em código. Use sempre que o usuário enviar uma RT ou um relato de caso trabalhista para revisar, pedir análise de risco, prescrição, rito ou teses omissas, ou pedir cálculo de verbas rescisórias, horas extras, adicionais, reflexos, FGTS, multas, correção monetária ou valor da causa, mesmo que não use a palavra "cálculo" ou "revisão".
 ---
 
 # Revisor de Reclamação Trabalhista e Calculadora Trabalhista
@@ -16,6 +16,32 @@ Quando a RT tiver pedidos sem valor ou com valor duvidoso, faça as duas.
 Arquivos de apoio (leia quando indicado):
 - `references/jurisprudencia-verificada.md`: verbetes cancelados e vigentes, teses de temas e tabela do salário mínimo, conferidos no Jusratio. **Leia antes de citar qualquer súmula, OJ ou tema.**
 - `scripts/calc_trabalhista.py`: funções testadas (avos, aviso prévio, divisor, hora noturna, adicionais, FGTS, multa, RSR e OJ 394). Importe-as no cálculo em vez de reescrever.
+
+---
+
+## 0. Etapa obrigatória em todo caso novo: atualização normativa
+
+Antes de revisar ou calcular, sempre que o usuário trouxer um caso novo, pesquise a legislação e a jurisprudência atuais. Não pule esta etapa, mesmo que a matéria pareça conhecida ou já esteja na referência.
+
+1. **Liste os temas do caso**: cada pedido, modalidade de rescisão, categoria, período contratual e questões processuais (rito, prescrição, gratuidade, responsabilidade de terceiros).
+2. **Legislação** (`buscar_legislacao` do Jusratio):
+   - confirme a redação **vigente** de cada artigo que vai fundamentar a análise (CLT, leis especiais, CF), observando `revogado` e `vigencia_status`;
+   - procure lei, medida provisória ou decreto **posterior** que altere o tema;
+   - confirme os valores do ano: salário mínimo, teto e tabela do INSS, tabela do IR, seguro-desemprego;
+   - se o contrato atravessa mudanças legais, verifique a redação de cada época.
+3. **Jurisprudência** (`pesquisar_documentos` do Jusratio):
+   - **uma** busca abrangente por tema central, com vocabulário de autoridade ("Tema", "IRR", "repercussão geral", "súmula");
+   - abra (`obter_documento`, sem custo) cada súmula ou OJ que pretende citar e confira se está cancelada ou alterada;
+   - confira o status de temas pendentes que afetem o caso, como o Tema 1.389;
+   - se o caso tramita ou vai tramitar num TRT conhecido, busque também o entendimento desse tribunal nos pontos controvertidos.
+4. **Compare com `references/jurisprudencia-verificada.md`**. Se algo mudou, use a informação nova e avise o usuário que a referência está desatualizada naquele ponto.
+5. **Abra a resposta com a seção "Atualização normativa"**, contendo:
+   - a data da consulta;
+   - o que foi conferido;
+   - o que mudou em relação à referência;
+   - os links das fontes.
+6. **Créditos**: pesquisas no Jusratio consomem créditos. Abrir documentos e súmulas pelo `doc_id` não consome. Prefira poucas buscas amplas e informe no fim quantos créditos foram usados.
+7. **Sem Jusratio disponível**: avise o usuário logo no início. Prossiga apenas com a referência, marcando tudo como "não verificado nesta data".
 
 ---
 
